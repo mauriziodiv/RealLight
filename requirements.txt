@@ -1,0 +1,25 @@
+# RealLight dependencies
+# Install each group as needed for the relevant block of the pipeline.
+
+# --- brain: 3D tracking ---
+# COLMAP is called as an external executable (subprocess); no pip package.
+# Install COLMAP separately: https://colmap.github.io/install.html
+
+# --- brain: AI light detection (Grounded SAM 2) ---
+# torch>=2.0
+# torchvision
+# groundingdino-py          # Grounding DINO (Apache 2.0)
+# sam2                      # SAM 2 (Apache 2.0) — from Meta's repo
+
+# --- brain: geometry / fusion maths ---
+# numpy
+# opencv-python
+
+# --- brain: USD export ---
+# usd-core                  # OpenUSD Python bindings
+
+# --- validation: review UI ---
+# PySide6                   # Qt for Python (LGPL)
+
+# --- katana ---
+# No pip dependencies; Katana bundles its own Python + USD + PySide2/6.

@@ -55,6 +55,13 @@ desktop.ini
 *.usd
 !docs/**/*.usd
 
+# Local assets (image sequences, not committed)
+Assets/
+
+# COLMAP binary (installed locally, not committed)
+COLMAP/
+Colmap/
+
 # Model weights and large binary assets
 *.pt
 *.pth

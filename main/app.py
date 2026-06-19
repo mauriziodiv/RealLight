@@ -117,16 +117,19 @@ class RealLightApp(QMainWindow):
         self.worker.start()
 
         self.ui.compute.setEnabled(False)
+        self.ui.load_footage.setEnabled(False)
         self.ui.compute_progress_bar.setVisible(True)
         self.ui.compute_progress_bar.setRange(0, 0)
         self.statusBar().showMessage("Computing...")
 
     def on_analysis_finished(self, result):
+        self.ui.load_footage.setEnabled(True)
         self.ui.compute_progress_bar.setVisible(False)
         self.ui.compute.setEnabled(True)
         self.statusBar().showMessage(f"Analysis finished: {result}")
 
     def on_analysis_error(self, error_message):
+        self.ui.load_footage.setEnabled(True)
         self.ui.compute_progress_bar.setVisible(False)
         self.ui.compute.setEnabled(True)
         self.statusBar().showMessage(f"Error during analysis: {error_message}")

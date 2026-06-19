@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "modules"))
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
@@ -8,6 +9,7 @@ from PySide6.QtWidgets import QFileDialog
 from brain.track.image_sequence import load_sequence
 from PySide6.QtGui import QPixmap, Qt
 from PySide6.QtCore import QTimer
+from modules.analysis import AnalysisThread
 
 class RealLightApp(QMainWindow):
     def __init__(self):
@@ -21,6 +23,11 @@ class RealLightApp(QMainWindow):
         self.setCentralWidget(self.ui)
         self.resize(1021, 773)
         self.ui.show()
+
+        self.ui.compute.clicked.connect(self.compute)
+
+        self.ui.compute_progress_bar.setVisible(False)
+        self.ui.compute_progress_bar.setValue(0)
 
         self.current_frame = 0
 
@@ -96,7 +103,33 @@ class RealLightApp(QMainWindow):
                 self.current_frame -= 1
                 self.ui.frame_scrubber.setValue(self.current_frame)
             else:
-                self.timer.stop()     
+                self.timer.stop()
+
+    def compute(self):
+        if not hasattr(self, 'images'):
+            self.statusBar().showMessage("No footage loaded. Please load footage before computing.")
+            return
+        
+        output_dir = str(Path(self.ui.footage_path.text()).parent / "output")
+        self.worker = AnalysisThread(self.ui.footage_path.text(), output_dir)
+        self.worker.finished.connect(self.on_analysis_finished)
+        self.worker.error.connect(self.on_analysis_error)
+        self.worker.start()
+
+        self.ui.compute.setEnabled(False)
+        self.ui.compute_progress_bar.setVisible(True)
+        self.ui.compute_progress_bar.setRange(0, 0)
+        self.statusBar().showMessage("Computing...")
+
+    def on_analysis_finished(self, result):
+        self.ui.compute_progress_bar.setVisible(False)
+        self.ui.compute.setEnabled(True)
+        self.statusBar().showMessage(f"Analysis finished: {result}")
+
+    def on_analysis_error(self, error_message):
+        self.ui.compute_progress_bar.setVisible(False)
+        self.ui.compute.setEnabled(True)
+        self.statusBar().showMessage(f"Error during analysis: {error_message}")
 
 def main():
     app = QApplication(sys.argv)

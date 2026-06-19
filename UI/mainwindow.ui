@@ -15,61 +15,55 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
-
-    <!-- Top bar: Load button + footage path -->
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QPushButton" name="load_footage">
-        <property name="text">
-         <string>Load Footage</string>
-        </property>
         <property name="minimumSize">
          <size>
           <width>120</width>
           <height>30</height>
          </size>
         </property>
+        <property name="text">
+         <string>Load Footage</string>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="footage_path">
-        <property name="text">
-         <string>No footage loaded</string>
-        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>1</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="text">
+         <string>No footage loaded</string>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
-
-    <!-- Frame viewer -->
     <item>
      <widget class="QLabel" name="frame_viewer">
-      <property name="text">
-       <string/>
-      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>1</horstretch>
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
       <property name="styleSheet">
        <string>background-color: #1a1a1a;</string>
       </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
      </widget>
     </item>
-
-    <!-- Playback controls -->
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
@@ -88,14 +82,14 @@
       <item>
        <widget class="QPushButton" name="play_backwards">
         <property name="text">
-         <string>&#9664; Play Backwards</string>
+         <string>◀ Play Backwards</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="play_forward">
         <property name="text">
-         <string>Play Forward &#9654;</string>
+         <string>Play Forward ▶</string>
         </property>
        </widget>
       </item>
@@ -114,8 +108,6 @@
       </item>
      </layout>
     </item>
-
-    <!-- Scrubber + frame counter -->
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_scrubber">
       <item>
@@ -133,26 +125,31 @@
       </item>
       <item>
        <widget class="QLabel" name="frame_counter">
-        <property name="text">
-         <string>0 / 0</string>
-        </property>
         <property name="minimumSize">
          <size>
           <width>60</width>
           <height>0</height>
          </size>
         </property>
+        <property name="text">
+         <string>0 / 0</string>
+        </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-
-    <!-- Bottom bar: Compute button -->
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_bottom">
+      <item>
+       <widget class="QProgressBar" name="compute_progress_bar">
+        <property name="value">
+         <number>24</number>
+        </property>
+       </widget>
+      </item>
       <item>
        <spacer name="horizontalSpacer_bottom">
         <property name="orientation">
@@ -168,20 +165,19 @@
       </item>
       <item>
        <widget class="QPushButton" name="compute">
-        <property name="text">
-         <string>Compute</string>
-        </property>
         <property name="minimumSize">
          <size>
           <width>120</width>
           <height>30</height>
          </size>
         </property>
+        <property name="text">
+         <string>Compute</string>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
-
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
